@@ -12,6 +12,7 @@ app.use(bodyParser.json());
 
 app.use('/users', userController);
 
+app.use(middlewares.domainError);
 app.use(middlewares.joiError);
 
 module.exports = app;

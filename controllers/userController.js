@@ -2,6 +2,7 @@ const router = require('express').Router();
 const rescue = require('express-rescue');
 const Joi = require('joi');
 
+const createError = require('../utils/createError');
 const userService = require('../services/userService');
 const { validateWithJoi } = require('./utils/joi');
 
@@ -27,6 +28,12 @@ router.post(
     validateWithJoi(userSchema, req.body);
 
     const { displayName, email, password, image } = req.body;
+
+    const verifyEmail = await userService.getByEmail(email);
+
+    if (verifyEmail) {
+      throw createError('conflict', 'User already registered');
+    }
 
     const userToken = await userService.create(displayName, email, password, image);
 
