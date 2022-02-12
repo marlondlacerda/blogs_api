@@ -28,9 +28,9 @@ router.post(
 
     const { displayName, email, password, image } = req.body;
 
-    const user = await userService.create(displayName, email, password, image);
+    const userToken = await userService.create(displayName, email, password, image);
 
-    res.status(201).json(user);
+    res.status(201).json(userToken);
   }),
 );
 
