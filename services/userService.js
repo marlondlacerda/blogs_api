@@ -39,7 +39,7 @@ const create = async (displayName, email, password, image) => {
     image,
   });
 
-  const token = jwt.sign({ displayName });
+  const token = jwt.sign({ email });
 
   return token;
 };
@@ -57,7 +57,7 @@ const login = async (email, password) => {
     throw createError('invalid', 'Invalid fields');
   }
 
-  const token = jwt.sign({ displayName: user.displayName });
+  const token = jwt.sign({ email: user.email });
 
   return token;
 };

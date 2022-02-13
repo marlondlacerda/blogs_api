@@ -9,10 +9,10 @@ const sign = (payload) =>
     expiresIn: '1d',
   });
 
-const veryfy = (token) => 
+const verify = (token) => 
   jwt.verify(token, JWT_SECRET, { algorithms: ['HS256'] });
 
 module.exports = {
     sign,
-    veryfy,
+    verify,
 };

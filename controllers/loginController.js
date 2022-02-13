@@ -2,7 +2,6 @@ const router = require('express').Router();
 const rescue = require('express-rescue');
 const Joi = require('joi');
 
-const createError = require('../utils/createError');
 const userService = require('../services/userService');
 const { validateWithJoi } = require('./utils/joi');
 
