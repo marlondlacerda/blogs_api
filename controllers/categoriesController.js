@@ -5,6 +5,15 @@ const categoriesService = require('../services/categoriesService');
 const { validateWithJoi } = require('./utils/joi');
 const { categoriesSchema } = require('./utils/schemas');
 
+router.get(
+  '/',
+  rescue(async (req, res) => {
+    const categories = await categoriesService.getAll();
+
+    res.status(200).json(categories);
+  }),
+);
+
 router.post(
   '/',
   rescue(async (req, res) => {

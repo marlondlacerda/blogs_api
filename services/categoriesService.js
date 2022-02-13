@@ -1,13 +1,20 @@
 const { Categories } = require('../models');
 
+const getAll = async () => {
+  const categories = await Categories.findAll();
+
+  return categories.map((category) => category.dataValues);
+};
+
 const create = async (name) => {
-  const result = await Categories.create({
+  const categories = await Categories.create({
     name,
   });
 
-  return result.dataValues;
+  return categories.dataValues;
 };
 
 module.exports = {
+  getAll,
   create,
 };
