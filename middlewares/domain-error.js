@@ -1,6 +1,7 @@
 module.exports = (err, req, res, next) => {
   const errorMap = {
     conflict: 409,
+    invalid: 400,
   };
 
   const status = errorMap[err.code];
