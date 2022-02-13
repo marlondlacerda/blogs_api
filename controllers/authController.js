@@ -1,19 +1,25 @@
 const router = require('express').Router();
 const rescue = require('express-rescue');
-const Joi = require('joi');
 
 const userService = require('../services/userService');
 const { validateWithJoi } = require('./utils/joi');
-
-const loginSchema = Joi.object().keys({
-  email: Joi.string().email().required(),
-  password: Joi.string().min(6).required().messages({
-    'string.min': '"password" length must be 6 characters long',
-  }),
-});
+const { loginSchema, userSchema } = require('./utils/schemas');
 
 router.post(
-  '/',
+  '/user',
+  rescue(async (req, res) => {
+    validateWithJoi(userSchema, req.body);
+
+    const { displayName, email, password, image } = req.body;
+
+    const userToken = await userService.create(displayName, email, password, image);
+
+    res.status(201).json({ token: userToken });
+  }),
+);
+
+router.post(
+  '/login',
   rescue(async (req, res) => {
     validateWithJoi(loginSchema, req.body);
 

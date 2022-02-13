@@ -11,6 +11,16 @@ const getAll = async () => {
   return users.map((user) => user.dataValues);
 };
 
+const getById = async (id) => {
+  const user = await Users.findByPk(id);
+
+  if (!user) {
+    throw createError('notFound', 'User does not exist');
+  }
+
+  return user.dataValues;
+};
+
 const verifyUserEmail = async (email) => {
   const user = await Users.findOne({
     where: { email },
@@ -64,6 +74,7 @@ const login = async (email, password) => {
 
 module.exports = {
   getAll,
+  getById,
   create,
   login,
 };
