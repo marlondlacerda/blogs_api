@@ -1,7 +1,6 @@
 const router = require('express').Router();
 const rescue = require('express-rescue');
 
-const createError = require('../utils/createError');
 const userService = require('../services/userService');
 
 router.get(
@@ -17,7 +16,6 @@ router.get(
   '/:id',
   rescue(async (req, res) => {
     const user = await userService.getById(req.params.id);
-    console.log(user);
 
     res.status(200).json(user);
   }),

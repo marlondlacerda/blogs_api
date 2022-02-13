@@ -1,5 +1,9 @@
 const Joi = require('joi');
 
+const categoriesSchema = Joi.object().keys({
+  name: Joi.string().required(),
+});
+
 const loginSchema = Joi.object().keys({
   email: Joi.string().email().required(),
   password: Joi.string().min(6).required().messages({
@@ -17,6 +21,7 @@ const userSchema = Joi.object().keys({
 });
 
 module.exports = {
+  categoriesSchema,
   loginSchema,
   userSchema,
 };
