@@ -10,7 +10,7 @@ const app = express();
 
 app.use(bodyParser.json());
 
-app.use('/users', userController);
+app.use('/user', userController);
 
 app.use(middlewares.domainError);
 app.use(middlewares.joiError);

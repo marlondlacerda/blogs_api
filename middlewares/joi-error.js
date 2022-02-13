@@ -1,12 +1,17 @@
-const Joi = require('joi');
+const joi = require('joi');
 
 module.exports = (err, req, res, next) => {
-  if (!Joi.isError(err)) return next(err);
+  // const errorMap = {
+  //   'string.min': 400,
+  //   'any.required': 400,
+  //   'string.email': 400,
+  // };
 
-  const error = {
-    code: 'UnprocessableEntity',
-    message: err.message,
-  };
+  if (!joi.isError(err)) return next(err);
 
-  return res.status(422).json(error);
+  // const { type } = err.details[0];
+
+  // const status = errorMap[type];
+
+  res.status(400).json({ message: err.message });
 };
