@@ -1,4 +1,3 @@
-const argon2 = require('argon2');
 const jwt = require('../utils/jwt');
 const { Users } = require('../models');
 
@@ -33,8 +32,6 @@ const verifyUserEmail = async (email) => {
 };
 
 const create = async (displayName, email, password, image) => {
-  const passwordHash = await argon2.hash(password, { type: argon2.argon2id });
-
   const userEmail = await verifyUserEmail(email);
 
   if (userEmail) {
@@ -44,7 +41,7 @@ const create = async (displayName, email, password, image) => {
   await Users.create({
     displayName,
     email,
-    password: passwordHash,
+    password,
     image,
   });
 
@@ -60,9 +57,7 @@ const login = async (email, password) => {
     throw createError('invalid', 'Invalid fields');
   }
 
-  const passwordValid = await argon2.verify(user.password, password);
-
-  if (!passwordValid) {
+  if (user.password !== password) {
     throw createError('invalid', 'Invalid fields');
   }
 
