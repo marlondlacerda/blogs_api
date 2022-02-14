@@ -17,6 +17,11 @@ const postSchema = Joi.object().keys({
   categoryIds: Joi.array().items(Joi.number().integer().required()).required(),
 });
 
+const updatePostSchema = Joi.object().keys({
+  title: Joi.string().required(),
+  content: Joi.string().required(),
+});
+
 const userSchema = Joi.object().keys({
   displayName: Joi.string().min(8).required(),
   email: Joi.string().email().required(),
@@ -30,5 +35,6 @@ module.exports = {
   categoriesSchema,
   loginSchema,
   postSchema,
+  updatePostSchema,
   userSchema,
 };

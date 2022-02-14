@@ -3,7 +3,8 @@ const rescue = require('express-rescue');
 
 const postService = require('../services/postService');
 const { validateWithJoi } = require('./utils/joi');
-const { postSchema } = require('./utils/schemas');
+const { postSchema, updatePostSchema } = require('./utils/schemas');
+const createError = require('../utils/createError');
 
 router.post(
   '/',
@@ -34,6 +35,23 @@ router.get(
     const { id } = req.params;
 
     const post = await postService.getById(id);
+
+    res.status(200).json(post);
+  }),
+);
+
+router.put(
+  '/:id',
+  rescue(async (req, res) => {
+    const { id } = req.params;
+    const { title, content } = req.body;
+    validateWithJoi(updatePostSchema, { title, content });
+
+    if (req.body.categoryIds) {
+      throw createError('invalid', 'Categories cannot be edited');
+    }
+
+    const post = await postService.update(id, title, content, req.userId);
 
     res.status(200).json(post);
   }),
