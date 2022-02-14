@@ -1,3 +1,5 @@
+const { Op } = require('sequelize');
+
 const { BlogPosts, Users, Categories } = require('../models');
 
 const categoriesService = require('./categoriesService');
@@ -50,6 +52,27 @@ const getById = async (id) => {
   return post;
 };
 
+const search = async (query) => {
+  const post = await BlogPosts.findAll({
+    where: { [Op.or]: [{ title: { [Op.substring]: query } },
+      { content: { [Op.substring]: query } }] },
+    include: [
+      {
+        model: Users, as: 'user', attributes: { exclude: 'password' },
+      },
+      {
+        model: Categories, as: 'categories', through: { attributes: [] },
+      },
+    ],
+  });
+
+  if (!post) {
+    return [];
+  }
+
+  return post;
+};
+
 const update = async (id, title, content, userId) => {
   const post = await BlogPosts.findOne({
     where: { id }, 
@@ -96,6 +119,7 @@ module.exports = {
   create,
   getAll,
   getById,
+  search,
   update,
   remove,
 };

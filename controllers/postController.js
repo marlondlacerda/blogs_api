@@ -21,6 +21,17 @@ router.post(
 );
 
 router.get(
+  '/search',
+  rescue(async (req, res) => {
+    const { q } = req.query;
+
+    const posts = await postService.search(q);
+
+    res.status(200).json(posts);
+  }),
+);
+
+router.get(
   '/',
   rescue(async (req, res) => {
     const posts = await postService.getAll();
