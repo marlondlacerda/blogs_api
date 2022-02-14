@@ -19,4 +19,24 @@ router.post(
   }),
 );
 
+router.get(
+  '/',
+  rescue(async (req, res) => {
+    const posts = await postService.getAll();
+
+    res.status(200).json(posts);
+  }),
+);
+
+router.get(
+  '/:id',
+  rescue(async (req, res) => {
+    const { id } = req.params;
+
+    const post = await postService.getById(id);
+
+    res.status(200).json(post);
+  }),
+);
+
 module.exports = router;
