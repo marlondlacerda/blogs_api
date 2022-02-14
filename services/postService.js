@@ -66,9 +66,7 @@ const search = async (query) => {
     ],
   });
 
-  if (!post) {
-    return [];
-  }
+  if (!post) return [];
 
   return post;
 };

@@ -24,9 +24,7 @@ const verifyUserEmail = async (email) => {
     where: { email },
   });
 
-  if (!user) {
-    return null;
-  }
+  if (!user) return null;
 
   return user.dataValues;
 };
