@@ -11,6 +11,12 @@ const loginSchema = Joi.object().keys({
   }),
 });
 
+const postSchema = Joi.object().keys({
+  title: Joi.string().required(),
+  content: Joi.string().required(),
+  categoryIds: Joi.array().items(Joi.number().integer().required()).required(),
+});
+
 const userSchema = Joi.object().keys({
   displayName: Joi.string().min(8).required(),
   email: Joi.string().email().required(),
@@ -23,5 +29,6 @@ const userSchema = Joi.object().keys({
 module.exports = {
   categoriesSchema,
   loginSchema,
+  postSchema,
   userSchema,
 };

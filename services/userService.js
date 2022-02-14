@@ -3,7 +3,6 @@ const jwt = require('../utils/jwt');
 const { Users } = require('../models');
 
 const createError = require('../utils/createError');
-// const isPasswordValid
 
 const getAll = async () => {
   const users = await Users.findAll();
@@ -75,6 +74,7 @@ const login = async (email, password) => {
 module.exports = {
   getAll,
   getById,
+  verifyUserEmail,
   create,
   login,
 };

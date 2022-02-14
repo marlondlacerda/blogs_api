@@ -1,15 +1,22 @@
 const jwt = require('../utils/jwt');
 
-const createError = require('../utils/createError');
+const userService = require('../services/userService');
 
-module.exports = (req, _res, next) => {
+module.exports = async (req, res, next) => {
   const token = req.headers.authorization;
   
   if (!token) {
-    throw createError('unauthorized', 'Token not found');
+    return res.status(401).json({ message: 'Token not found' });
   }
 
-  jwt.verify(token);
+  try {
+    const { email } = jwt.verify(token);
+    const { id } = await userService.verifyUserEmail(email);
 
-  next();
+    req.userId = id;
+
+    return next();
+  } catch (err) {
+    return res.status(401).json({ message: 'Expired or invalid token' });
+  }
 };
