@@ -57,4 +57,15 @@ router.put(
   }),
 );
 
+router.delete(
+  '/:id',
+  rescue(async (req, res) => {
+    const { id } = req.params;
+
+    await postService.remove(id, req.userId);
+
+    res.status(204).end();
+  }),
+);
+
 module.exports = router;
