@@ -66,10 +66,13 @@ const login = async (email, password) => {
   return token;
 };
 
+const deleteById = async (id) => Users.destroy({ where: { id } });
+
 module.exports = {
   getAll,
   getById,
   verifyUserEmail,
   create,
   login,
+  deleteById,
 };

@@ -21,4 +21,13 @@ router.get(
   }),
 );
 
+router.delete(
+  '/me',
+  rescue(async (req, res) => {
+    await userService.deleteById(req.userId);
+
+    res.status(204).end();
+  }),
+);
+
 module.exports = router;
