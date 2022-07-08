@@ -13,7 +13,7 @@
   <div align="left" style="display: inline_block">
     <h2>Módulo: DESENVOLVIMENTO BACK-END</h2>
     <p>
-      Repositório possuí projeto desenvolvido no período que estive na <b>Trybe</b>, abordando os conceitos de <b>API Rest</b> com CRUD completo e seus endpoints.
+      Repositório possuí projeto desenvolvido no período que estive na <b>Trybe</b>, abordando os conceitos de <b>API Rest</b> com CRUD completo e seus endpoints.Agora usando um ORM Sequelize e uma autênticação de Token o JWT WEB TOKEN!
   </div>
   <br>
 </div>
