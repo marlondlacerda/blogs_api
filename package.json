@@ -6,7 +6,7 @@
     "argon2": "^0.28.4",
     "dotenv": "8.2.0",
     "eslint-config-trybe-backend": "1.0.3",
-    "express": "4.17.1",
+    "express": "4.21.1",
     "express-rescue": "^1.1.31",
     "joi": "^17.6.0",
     "jsonwebtoken": "^8.5.1",
